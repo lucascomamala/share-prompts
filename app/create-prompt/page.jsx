@@ -21,21 +21,20 @@ const CreatePrompt = () => {
     setSubmitting(true)
 
     try {
-      const res = await fetch("/api/prompt/new", {
+      const response = await fetch("/api/prompt/new", {
         method: "POST",
         body: JSON.stringify({
           prompt: post.prompt,
-          session: session?.user.id,
+          userId: session?.user.id,
           tag: post.tag,
         }),
       })
 
-      if (res.ok) {
+      if (response.ok) {
         router.push("/")
       }
-
     } catch (error) {
-      console.error(error)
+      console.log(error)
     } finally {
       setSubmitting(false)
     }
@@ -43,7 +42,7 @@ const CreatePrompt = () => {
 
   return (
     <Form
-      type="Create"
+      type='Create'
       post={post}
       setPost={setPost}
       submitting={submitting}
